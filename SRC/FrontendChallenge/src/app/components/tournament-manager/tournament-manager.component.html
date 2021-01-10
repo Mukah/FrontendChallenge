@@ -1,0 +1,15 @@
+{{totalStages}}
+<ng-container *ngFor="let stageKeys of tournament.keys; let stageIndex = index">
+  <ul>
+    <li *ngFor="let key of stageKeys; let keyIndex = index">
+      <mat-radio-group [name]="'stage-' + stageIndex + '-key-' + keyIndex + '-radio-group'" (change)="onKeyChange($event, stageIndex, keyIndex)">
+        <mat-radio-button [value]="key.team1" *ngIf="key.team1">
+          {{key.team1.name}}
+        </mat-radio-button>
+        <mat-radio-button [value]="key.team2" *ngIf="key.team2">
+          {{key.team2.name}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </li>
+  </ul>
+</ng-container>

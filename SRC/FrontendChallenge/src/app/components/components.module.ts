@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatStepperModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatRadioModule, MatSelectModule, MatStepperModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { TournamentViewer } from './tournament-viewer/tournament-viewer.component';
+import { TournamentManager } from './tournament-manager/tournament-manager.component';
 
 @NgModule({
   declarations: [
-    TournamentViewer
+    TournamentManager
   ],
   imports: [
     CommonModule,
@@ -17,17 +17,21 @@ import { TournamentViewer } from './tournament-viewer/tournament-viewer.componen
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
+    MatRadioModule,
     MatSelectModule,
     MatStepperModule
   ],
   exports: [
-    TournamentViewer,
+    TournamentManager,
 
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
+    MatRadioModule,
     MatSelectModule,
     MatStepperModule
   ]
