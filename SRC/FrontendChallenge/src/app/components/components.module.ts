@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatStepperModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { TournamentViewer } from './tournament-viewer/tournament-viewer.component';
 
 @NgModule({
   declarations: [
+    TournamentViewer
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,8 @@ import { RouterModule } from '@angular/router';
     MatStepperModule
   ],
   exports: [
+    TournamentViewer,
+
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
