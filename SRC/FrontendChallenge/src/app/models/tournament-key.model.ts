@@ -1,6 +1,6 @@
 import { Team } from "./team.model";
 
-export class Key {
+export class TournamentKey {
   /** Team one */
   public team1: Team;
 
