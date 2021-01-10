@@ -1,1 +1,68 @@
-Hello World
+<div class="container">
+  <h1>Torneio</h1>
+  <mat-card>
+    <mat-horizontal-stepper linear #stepper (selectionChange)="stepperSelectionChange($event)">
+      <mat-step label="Torneio" [optional]="false" [editable]="false" [completed]="false">
+        <form [formGroup]="tournamentFormGroup" (ngSubmit)="onTournamentFormSubmit($event)">
+          <div class="row">
+            <div class="col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Nome do torneio</mat-label>
+                <input matInput type="text" [formControl]="tournamentFormControls.name" required>
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Número de chaves</mat-label>
+                <mat-select [formControl]="tournamentFormControls.keys" required>
+                  <mat-option [value]="4">4</mat-option>
+                  <mat-option [value]="6">6</mat-option>
+                  <mat-option [value]="8">8</mat-option>
+                  <mat-option [value]="10">10</mat-option>
+                  <mat-option [value]="12">12</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-12 text-right">
+              <button mat-flat-button type="submit" color="primary">Avançar</button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step label="Chaves iniciais" [optional]="false" [editable]="false" [completed]="false">
+        <form [formGroup]="initialKeysFormGroup" (ngSubmit)="onInitialKeysFormSubmit($event)">
+          <div class="row">
+            <div class="col-12" *ngFor="let keysFormControl of initialKeysFormControls; index as i">
+              <h2>Chave {{ i + 1 }}</h2>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Time</mat-label>
+                    <input matInput type="text" [formControl]="keysFormControl.team1" required [value]="'Time ' + (i + i + 1)">
+                  </mat-form-field>
+                </div>
+                <div class="col-auto">x</div>
+                <div class="col">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Time</mat-label>
+                    <input matInput type="text" [formControl]="keysFormControl.team2" required [value]="'Time ' + (i + i + 2)">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <button mat-flat-button type="button">Voltar</button>
+              <button mat-flat-button type="submit" color="primary">Avançar</button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step label="Eliminações" [optional]="false" [editable]="false" [completed]="false">
+        
+      </mat-step>
+      <mat-step label="Vencedor" [optional]="false" [editable]="false" [completed]="false">
+      
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+</div>
