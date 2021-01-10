@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatStepperModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -10,8 +11,21 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule,
     FormsModule,
+
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatStepperModule
   ],
   exports: [
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatStepperModule
   ]
 })
 export class ComponentsModule { }
