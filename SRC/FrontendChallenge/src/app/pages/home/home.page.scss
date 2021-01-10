@@ -1,3 +1,32 @@
 .mat-form-field {
   width: 100%
 }
+
+.buttons-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.winner-paragraph {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+
+  .mat-icon {
+    font-size: 128px;
+    width: 128px;
+    height: 128px;
+    color: #FFB81C;
+  }
+
+  span {
+    display: block;
+    max-width: 400px;
+    font-size: 24px;
+    color: #999;
+    text-transform: uppercase;
+  }
+}

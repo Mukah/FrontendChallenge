@@ -15,16 +15,17 @@
               <mat-form-field appearance="outline">
                 <mat-label>Número de chaves</mat-label>
                 <mat-select [formControl]="tournamentFormControls.keys" required>
+                  <mat-option [value]="2">2</mat-option>
                   <mat-option [value]="4">4</mat-option>
-                  <mat-option [value]="6">6</mat-option>
                   <mat-option [value]="8">8</mat-option>
-                  <mat-option [value]="10">10</mat-option>
-                  <mat-option [value]="12">12</mat-option>
+                  <mat-option [value]="16">16</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="col-12 text-right">
-              <button mat-flat-button type="submit" color="primary">Avançar</button>
+            <div class="col-12">
+              <div class="buttons-wrapper">
+                <button mat-flat-button type="submit" color="primary">Avançar</button>
+              </div>
             </div>
           </div>
         </form>
@@ -38,30 +39,54 @@
                 <div class="col">
                   <mat-form-field appearance="outline">
                     <mat-label>Time</mat-label>
-                    <input matInput type="text" [formControl]="keysFormControl.team1" required [value]="'Time ' + (i + i + 1)">
+                    <input matInput type="text" [formControl]="keysFormControl.team1" [value]="'Time ' + (i + i + 1)" required>
                   </mat-form-field>
                 </div>
                 <div class="col-auto">x</div>
                 <div class="col">
                   <mat-form-field appearance="outline">
                     <mat-label>Time</mat-label>
-                    <input matInput type="text" [formControl]="keysFormControl.team2" required [value]="'Time ' + (i + i + 2)">
+                    <input matInput type="text" [formControl]="keysFormControl.team2" [value]="'Time ' + (i + i + 2)" required>
                   </mat-form-field>
                 </div>
               </div>
             </div>
             <div class="col-12">
-              <button mat-flat-button type="button">Voltar</button>
-              <button mat-flat-button type="submit" color="primary">Avançar</button>
+              <div class="buttons-wrapper">
+                <button mat-flat-button type="button" (click)="onInitialKeysBack($event)">Voltar</button>
+                <button mat-flat-button type="submit" color="primary">Avançar</button>
+              </div>
             </div>
           </div>
         </form>
       </mat-step>
       <mat-step label="Eliminações" [optional]="false" [editable]="false" [completed]="false">
-        
+        <div class="row">
+          <div class="col-12">
+            <tournament-manager [tournament]="tournament" (change)="onTournamentManagerChange($event)" *ngIf="tournament"></tournament-manager>
+          </div>
+          <div class="col-12">
+            <div class="buttons-wrapper">
+              <button mat-flat-button type="button" (click)="onTournamentReset($event)">Resetar</button>
+              <button mat-flat-button type="button" color="primary" (click)="onTournamentFinish($event)" [disabled]="!winner">Finalizar</button>
+            </div>
+          </div>
+        </div>
       </mat-step>
       <mat-step label="Vencedor" [optional]="false" [editable]="false" [completed]="false">
-      
+        <div class="row">
+          <div class="col-12">
+            <p class="winner-paragraph">
+              <mat-icon>emoji_events</mat-icon>
+              <span>{{winner?.name}} ganhou o torneio!</span>
+            </p>
+          </div>
+          <div class="col-12">
+            <div class="buttons-wrapper">
+              <button mat-flat-button type="button" color="primary" (click)="onNewTournament($event)">Novo Torneio</button>
+            </div>
+          </div>
+        </div>
       </mat-step>
     </mat-horizontal-stepper>
   </mat-card>
