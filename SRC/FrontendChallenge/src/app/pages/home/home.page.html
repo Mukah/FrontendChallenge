@@ -42,7 +42,7 @@
                     <input matInput type="text" [formControl]="keysFormControl.team1" [value]="'Time ' + (i + i + 1)" required>
                   </mat-form-field>
                 </div>
-                <div class="col-auto">x</div>
+                <div class="col-auto"><span class="versus"></span></div>
                 <div class="col">
                   <mat-form-field appearance="outline">
                     <mat-label>Time</mat-label>
@@ -78,7 +78,7 @@
           <div class="col-12">
             <p class="winner-paragraph">
               <mat-icon>emoji_events</mat-icon>
-              <span>{{winner?.name}} ganhou o torneio!</span>
+              <span><strong>{{winner?.name}}</strong> ganhou o torneio!</span>
             </p>
           </div>
           <div class="col-12">

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material';
+import { empty } from 'rxjs';
 import { Team } from 'src/app/models/team.model';
 import { TournamentKey } from 'src/app/models/tournament-key.model';
 import { Tournament } from 'src/app/models/tournament.model';
@@ -37,7 +38,7 @@ export class HomePage {
   ngOnInit() {
     this.tournamentFormControls = {
       name: new FormControl(null, [ Validators.required ]),
-      keys: new FormControl(4, [ Validators.required ])
+      keys: new FormControl(2, [ Validators.required ])
     };
 
     this.tournamentFormGroup = this.formBuilder.group(this.tournamentFormControls);
@@ -53,23 +54,41 @@ export class HomePage {
     this.tournament.name = this.tournamentFormControls.name.value;
     this.tournament.keys = [];
 
-    let initialKeys: Array<TournamentKey> = [];
+    let totalStages = (Math.log(this.tournamentFormControls.keys.value) / Math.log(2)) + 1;
+    let keysAmount = this.tournamentFormControls.keys.value;
 
-    Object.values(this.initialKeysFormGroup.controls).forEach((formGroup: FormGroup) => {
-      let tournamentKey = new TournamentKey();
+    for (let i = 0; i < totalStages; i++) {
+      if (i == 0) {
+        // Fill initial keys
+        let initialKeys: Array<TournamentKey> = [];
+        
+        Object.values(this.initialKeysFormGroup.controls).forEach((formGroup: FormGroup) => {
+          let tournamentKey = new TournamentKey();
+          
+          let team1 = new Team();
+          team1.name = formGroup.controls.team1.value;
+          tournamentKey.team1 = team1;
+          
+          let team2 = new Team();
+          team2.name = formGroup.controls.team2.value;
+          tournamentKey.team2 = team2;
+          
+          initialKeys.push(tournamentKey);
+        });
+        this.tournament.keys[0] = initialKeys;
+      } else {
+        // Fill empty keys
+        let emptyKeys = Array(keysAmount);
+        for(let i = 0; i < keysAmount; i++) {
+          emptyKeys[i] = new TournamentKey();
+        }
 
-      let team1 = new Team();
-      team1.name = formGroup.controls.team1.value;
-      tournamentKey.team1 = team1;
+        console.log(emptyKeys);
 
-      let team2 = new Team();
-      team2.name = formGroup.controls.team2.value;
-      tournamentKey.team2 = team2;
-
-      initialKeys.push(tournamentKey);
-    });
-
-    this.tournament.keys.push(initialKeys);
+        this.tournament.keys[i] = emptyKeys;  
+      }
+      keysAmount = keysAmount / 2;
+    }
   }
   
   /**
@@ -107,6 +126,8 @@ export class HomePage {
    * @param event Form event
    */
   onTournamentFormSubmit(event: any) {
+    event.preventDefault();
+
     if (this.tournamentFormGroup.valid) {
       this.stepper.selected.completed = true;
       this.stepper.selected.editable = true;
@@ -127,6 +148,8 @@ export class HomePage {
    * @param event Form event
    */
   onInitialKeysFormSubmit(event: any) {
+    event.preventDefault();
+    
     if (this.initialKeysFormGroup.valid) {
       this.createTournament();
 

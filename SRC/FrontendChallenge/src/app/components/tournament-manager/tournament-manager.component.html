@@ -1,15 +1,41 @@
-{{totalStages}}
-<ng-container *ngFor="let stageKeys of tournament.keys; let stageIndex = index">
-  <ul>
-    <li *ngFor="let key of stageKeys; let keyIndex = index">
-      <mat-radio-group [name]="'stage-' + stageIndex + '-key-' + keyIndex + '-radio-group'" (change)="onKeyChange($event, stageIndex, keyIndex)">
-        <mat-radio-button [value]="key.team1" *ngIf="key.team1">
-          {{key.team1.name}}
-        </mat-radio-button>
-        <mat-radio-button [value]="key.team2" *ngIf="key.team2">
-          {{key.team2.name}}
-        </mat-radio-button>
-      </mat-radio-group>
-    </li>
-  </ul>
-</ng-container>
+<div class="swiper-container" [swiper]="config">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide" *ngFor="let stageKeys of tournament.keys; let stageIndex = index">
+      <div class="tournament-stage">
+        <ng-container *ngFor="let key of stageKeys; let keyIndex = index">
+          <ng-container *ngIf="key.team1 || key.team2">
+            <mat-radio-group [name]="'stage-' + stageIndex + '-key-' + keyIndex + '-radio-group'" class="tournament-key"  (change)="onKeyChange($event, stageIndex, keyIndex)">
+              <label class="team team-1">
+                <mat-radio-button [value]="key.team1" *ngIf="key.team1">
+                  {{key.team1.name}}
+                </mat-radio-button>
+              </label>
+              <label class="team team-2">
+                <mat-radio-button [value]="key.team2" *ngIf="key.team2">
+                  {{key.team2.name}}
+                </mat-radio-button>
+              </label>
+            </mat-radio-group>
+          </ng-container>
+          <ng-container *ngIf="!key.team1 && !key.team2">
+            <div class="tournament-key">
+              <div class="team"></div>
+              <div class="team"></div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div class="tournament-stage">
+        <div class="tournament-winner">
+          <div class="team">
+            <ng-container *ngIf="winner">
+              <mat-icon class="trophy">emoji_events</mat-icon> {{winner.name}}
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,18 @@
   width: 100%
 }
 
+.versus {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  font-size: 22px;
+  color: #999;
+
+  &:before {
+    content: '\00d7';
+  }
+}
+
 .buttons-wrapper {
   display: flex;
   flex-wrap: nowrap;
