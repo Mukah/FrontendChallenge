@@ -16,17 +16,22 @@ export class TournamentManager {
   @ViewChild(SwiperComponent, { static: false }) swiper2: SwiperComponent;
   @ViewChildren(MatRadioGroup) radioGroups: QueryList<MatRadioGroup>;
 
+  /** Tournament object */
   @Input() tournament: Tournament;
 
+  /** Tournament manager change event */
   @Output() change: EventEmitter<Team> = new EventEmitter<Team>();
 
+  /** Slider settings */
   public config: SwiperConfig;
 
-  public winner: Team;
+  /** Tournament winner */
+  public winner: Team = null;
 
   constructor() { }
 
   ngOnInit() {
+    // Initialize slider settings
     this.config = new SwiperConfig({
       slidesPerView: 2.5,
       centeredSlides: true,
@@ -38,6 +43,12 @@ export class TournamentManager {
     });
   }
 
+  /**
+   * Binds change event for each team radio group
+   * @param event Radio event
+   * @param stageIndex Tournament stage index
+   * @param keyIndex Tournament key of a stage index
+   */
   onKeyChange(event: any, stageIndex: number, keyIndex: number) {
     // If isn't last stage (not winner stage)
     if ((stageIndex + 1) < this.totalStages) {
@@ -81,17 +92,25 @@ export class TournamentManager {
     this.change.emit(this.winner);
   }
 
-  get totalStages(): number {
-    return (Math.log(this.tournament.keys[0].length) / Math.log(2)) + 1;
-  }
-
+  /**
+   * Reset a radio button group selection
+   * @param stageIndex Tournament stage index
+   * @param keyIndex Tournament key of a stage index
+   */
   resetRadioButtonGroup(stageIndex: number, keyIndex: number) {
     let radioGroup: MatRadioGroup = this.radioGroups.find((o) => {
       return o.name == `stage-${stageIndex}-key-${keyIndex}-radio-group`;
     });
-
+    
     if (radioGroup) {
       radioGroup.writeValue(null);
     }
+  }
+
+  /**
+   * Returns total amount of stages to have a winner
+   */
+  get totalStages(): number {
+    return (Math.log(this.tournament.keys[0].length) / Math.log(2)) + 1;
   }
 }
