@@ -36,14 +36,14 @@
             <div class="col-12" *ngFor="let keysFormControl of initialKeysFormControls; index as i">
               <h2>Chave {{ i + 1 }}</h2>
               <div class="row">
-                <div class="col">
+                <div class="col-12 col-sm">
                   <mat-form-field appearance="outline">
                     <mat-label>Time</mat-label>
                     <input matInput type="text" [formControl]="keysFormControl.team1" [value]="'Time ' + (i + i + 1)" required>
                   </mat-form-field>
                 </div>
-                <div class="col-auto"><span class="versus"></span></div>
-                <div class="col">
+                <div class="col-auto d-none d-md-block"><span class="versus"></span></div>
+                <div class="col-12 col-sm">
                   <mat-form-field appearance="outline">
                     <mat-label>Time</mat-label>
                     <input matInput type="text" [formControl]="keysFormControl.team2" [value]="'Time ' + (i + i + 2)" required>

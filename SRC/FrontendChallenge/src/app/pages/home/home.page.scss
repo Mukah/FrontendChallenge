@@ -1,3 +1,5 @@
+@import '~bootstrap/dist/css/bootstrap-grid.min.css';
+
 .mat-form-field {
   width: 100%
 }
@@ -26,6 +28,7 @@
   flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 
   .mat-icon {
     font-size: 128px;
@@ -40,5 +43,13 @@
     font-size: 24px;
     color: #999;
     text-transform: uppercase;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .mat-stepper-horizontal::ng-deep {
+    .mat-horizontal-content-container {
+      padding: 0;
+    }
   }
 }
